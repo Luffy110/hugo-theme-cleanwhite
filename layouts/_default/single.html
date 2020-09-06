@@ -1,10 +1,12 @@
 {{ define "header" }}
+
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header {
         background-image: url('{{ if .Params.image }}{{ .Params.image | relURL }}{{ else }}{{ .Site.Params.header_image | relURL}}{{ end }}')
     }
 </style>
+
 <header class="intro-header">
     <div class="container">
         <div class="row">
@@ -35,6 +37,9 @@
                         {{ if (and (not .Lastmod.IsZero) (not (eq (dateFormat "2006-01-02" .Lastmod) (dateFormat "2006-01-02" .Date)))) }}
                         <br>Last Modified on {{ dateFormat "Monday, January 2, 2006" .Params.LastMod }}
                         {{ end }}
+                        {{ if .Site.Params.busuanzi }}
+                        <h5 id="wc" style="font-size: 2rem;text-align: right;">本文共 {{ .FuzzyWordCount }} 字|阅读大约 {{ .ReadingTime }} 分钟|总阅读量<span id="busuanzi_value_page_pv"></span>次</h5>
+                        {{ end }}
                     </span>
                 </div>
             </div>
@@ -42,6 +47,7 @@
     </div>
 </header>
 {{ end }}
+
 
 {{ define "main" }}
 <!-- Post Content -->
